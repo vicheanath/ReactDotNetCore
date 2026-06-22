@@ -1,6 +1,6 @@
 {
   "name": "@react-dotnetcore/runtime",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React-as-MVC-view runtime for ReactDotNetCore.AspNetCore: component registry, SSR renderer, client hydration, and a Node SSR sidecar (production + Vite HMR dev).",
   "license": "MIT",
   "type": "module",

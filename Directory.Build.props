@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Authors>ReactDotNetCore Contributors</Authors>
     <Product>ReactDotNetCore</Product>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>

@@ -39,10 +39,17 @@ public static class ReactDotNetCoreServiceCollectionExtensions
 
     private static int FindFreeLoopbackPort()
     {
-        using var listener = new TcpListener(IPAddress.Loopback, 0);
+        // Note: TcpListener only implements IDisposable on .NET 8+, so Start/Stop (available on all
+        // targets) is used instead of `using` for cross-framework compatibility.
+        var listener = new TcpListener(IPAddress.Loopback, 0);
         listener.Start();
-        var port = ((IPEndPoint)listener.LocalEndpoint).Port;
-        listener.Stop();
-        return port;
+        try
+        {
+            return ((IPEndPoint)listener.LocalEndpoint).Port;
+        }
+        finally
+        {
+            listener.Stop();
+        }
     }
 }

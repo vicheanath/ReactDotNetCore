@@ -40,5 +40,5 @@ npm install -D vite @vitejs/plugin-react typescript @types/react @types/react-do
 
 ## Requirements
 
-- .NET SDK 8.0+
-- Node.js 18+ (tested on Node 24 LTS)
+- **.NET 6, 7, 8, 9, or 10** — the engine multi-targets `net6.0` through `net10.0`, so it works on any of these runtimes.
+- Node.js 18+ (tested on Node 24 LTS) for the SSR sidecar.

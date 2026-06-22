@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 10.0.x   # latest SDK builds all multi-target frameworks (net6 → net10)
       - name: Pack
         run: dotnet pack packages/react-dotnetcore-aspnetcore/ReactDotNetCore.AspNetCore.csproj -c Release -o artifacts
       - name: NuGet login (OIDC -> short-lived API key)

@@ -1,11 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <!-- Supports .NET 6 through .NET 10 (LTS 6/8/10 + STS 9). The engine only uses APIs available
+         since .NET 6 (e.g. Utf8JsonWriter.WriteRawValue). -->
+    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>ReactDotNetCore</RootNamespace>
     <AssemblyName>ReactDotNetCore.AspNetCore</AssemblyName>
+    <!-- Don't fail/noise on building the older (EOL) target frameworks. -->
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <!-- NuGet package metadata -->

@@ -8,7 +8,8 @@ Both packages ship **in lockstep** — the same version, released together:
 | `ReactDotNetCore.AspNetCore` | NuGet | `Directory.Build.props` (`<Version>`) |
 
 They're a matched pair (the .NET engine and its JS runtime), so they always carry the same version.
-The `npm run bump` command keeps both files in sync.
+`npm run bump` keeps both manifests **and `package-lock.json`** in sync (a stale lock makes CI's
+`npm ci` fail), so always commit it alongside the version bump.
 
 ## Release steps
 

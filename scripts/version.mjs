@@ -8,6 +8,7 @@
 //   npm run bump minor
 //   npm run bump 0.2.0
 import { readFileSync, writeFileSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -44,18 +45,22 @@ const pkgRaw = readFileSync(pkgPath, "utf8").replace(/("version":\s*")[^"]*(")/,
 writeFileSync(pkgPath, pkgRaw);
 
 const propsRaw = readFileSync(propsPath, "utf8");
-const propsNext = propsRaw.replace(/<Version>[^<]*<\/Version>/, `<Version>${next}</Version>`);
-if (propsNext === propsRaw) {
+if (!/<Version>[^<]*<\/Version>/.test(propsRaw)) {
   console.error("Could not find <Version> in Directory.Build.props.");
   process.exit(1);
 }
-writeFileSync(propsPath, propsNext);
+writeFileSync(propsPath, propsRaw.replace(/<Version>[^<]*<\/Version>/, `<Version>${next}</Version>`));
 
-console.log(`Bumped ${current} -> ${next}`);
+// Keep package-lock.json in sync with the new workspace version — otherwise `npm ci` (in CI) fails
+// with "package.json and package-lock.json ... are out of sync".
+console.log("Updating package-lock.json...");
+execSync("npm install --package-lock-only", { cwd: root, stdio: "inherit" });
+
+console.log(`\nBumped ${current} -> ${next}`);
 console.log("  npm:   @react-dotnetcore/runtime");
 console.log("  nuget: ReactDotNetCore.AspNetCore");
-console.log("\nNext:");
+console.log("  lock:  package-lock.json");
+console.log("\nNext (pushing the tag auto-creates the GitHub Release and publishes both packages):");
 console.log(`  git commit -am "release: v${next}"`);
 console.log(`  git tag v${next}`);
 console.log("  git push --follow-tags");
-console.log(`  gh release create v${next} --generate-notes   # triggers the publish workflow`);

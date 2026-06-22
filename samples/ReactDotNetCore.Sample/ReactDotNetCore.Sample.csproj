@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\packages\react-dotnetcore-aspnetcore\ReactDotNetCore.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- The frontend lives under Views/; keep its tooling out of the .NET compile/content globs. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);Views\node_modules\**;Views\dist\**;node_modules\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+</Project>

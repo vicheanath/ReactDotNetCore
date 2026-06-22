@@ -1,0 +1,13 @@
+<Project>
+
+  <!-- Shared metadata for all .NET projects in the repo. -->
+  <PropertyGroup>
+    <Authors>ReactDotNetCore Contributors</Authors>
+    <Product>ReactDotNetCore</Product>
+    <Version>0.1.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

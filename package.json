@@ -1,0 +1,16 @@
+{
+  "name": "react-dotnetcore-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/react-dotnetcore-runtime",
+    "samples/ReactDotNetCore.Sample/Views"
+  ],
+  "scripts": {
+    "build:runtime": "npm run build -w @react-dotnetcore/runtime",
+    "build:sample": "npm run build -w react-dotnetcore-sample",
+    "build": "npm run build:runtime && npm run build:sample",
+    "typecheck": "npm run typecheck -w @react-dotnetcore/runtime",
+    "test": "npm run test -w @react-dotnetcore/runtime"
+  }
+}

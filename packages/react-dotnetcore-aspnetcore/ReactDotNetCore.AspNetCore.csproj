@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ReactDotNetCore</RootNamespace>
+    <AssemblyName>ReactDotNetCore.AspNetCore</AssemblyName>
+  </PropertyGroup>
+
+  <!-- NuGet package metadata -->
+  <PropertyGroup>
+    <PackageId>ReactDotNetCore.AspNetCore</PackageId>
+    <Title>ReactDotNetCore for ASP.NET Core</Title>
+    <Description>Use React components as ASP.NET Core MVC views with server-side rendering and hydration — no separate Web API, Next.js, or SPA. Keep your existing controllers, services, and view models; replace only the view layer. A Node SSR sidecar (production build + Vite HMR dev) renders React on the server.</Description>
+    <PackageTags>react;ssr;mvc;razor-pages;aspnetcore;vite;hydration;typescript;view-engine</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/your-org/react-dotnetcore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/your-org/react-dotnetcore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- Public API is documented where it matters; don't fail on every member. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

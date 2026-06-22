@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{BBF48C42-FBCA-429C-B977-A8C7C0B89BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactDotNetCore.AspNetCore", "packages\react-dotnetcore-aspnetcore\ReactDotNetCore.AspNetCore.csproj", "{4759DA1B-7100-4B5A-B227-7E07325548BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4851B307-77D4-416E-B293-079F8B465729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactDotNetCore.Sample", "samples\ReactDotNetCore.Sample\ReactDotNetCore.Sample.csproj", "{F6FB73C8-3C16-4738-B972-25704CF1418C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02BCA329-9BD4-4C1B-8B29-981886DAEA48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactDotNetCore.AspNetCore.Tests", "tests\ReactDotNetCore.AspNetCore.Tests\ReactDotNetCore.AspNetCore.Tests.csproj", "{C3B4289D-7A75-4733-A369-1AF3697D35F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4759DA1B-7100-4B5A-B227-7E07325548BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4759DA1B-7100-4B5A-B227-7E07325548BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4759DA1B-7100-4B5A-B227-7E07325548BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4759DA1B-7100-4B5A-B227-7E07325548BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FB73C8-3C16-4738-B972-25704CF1418C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FB73C8-3C16-4738-B972-25704CF1418C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FB73C8-3C16-4738-B972-25704CF1418C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FB73C8-3C16-4738-B972-25704CF1418C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B4289D-7A75-4733-A369-1AF3697D35F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B4289D-7A75-4733-A369-1AF3697D35F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B4289D-7A75-4733-A369-1AF3697D35F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B4289D-7A75-4733-A369-1AF3697D35F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4759DA1B-7100-4B5A-B227-7E07325548BC} = {BBF48C42-FBCA-429C-B977-A8C7C0B89BDB}
+		{F6FB73C8-3C16-4738-B972-25704CF1418C} = {4851B307-77D4-416E-B293-079F8B465729}
+		{C3B4289D-7A75-4733-A369-1AF3697D35F6} = {02BCA329-9BD4-4C1B-8B29-981886DAEA48}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,36 @@
+name: Publish
+
+# Publishes both packages on a GitHub Release (or manual dispatch).
+# Requires repository secrets: NPM_TOKEN (npm automation token) and NUGET_API_KEY.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run build:runtime
+      - name: Publish @react-dotnetcore/runtime
+        run: npm publish -w @react-dotnetcore/runtime --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  nuget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Pack
+        run: dotnet pack packages/react-dotnetcore-aspnetcore/ReactDotNetCore.AspNetCore.csproj -c Release -o artifacts
+      - name: Push to NuGet.org
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

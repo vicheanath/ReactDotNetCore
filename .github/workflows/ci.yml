@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install JS deps
+        run: npm ci
+
+      - name: Build npm package + sample frontend
+        run: npm run build
+
+      - name: Typecheck runtime
+        run: npm run typecheck
+
+      - name: Test runtime (Vitest)
+        run: npm test
+
+      - name: Build .NET solution
+        run: dotnet build ReactDotNetCore.sln -c Release
+
+      - name: Test .NET (xUnit)
+        run: dotnet test ReactDotNetCore.sln -c Release --no-build
+
+      - name: Pack (NuGet)
+        run: dotnet pack packages/react-dotnetcore-aspnetcore/ReactDotNetCore.AspNetCore.csproj -c Release -o artifacts
+
+      - name: Pack (npm)
+        run: npm pack -w @react-dotnetcore/runtime --pack-destination artifacts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/*

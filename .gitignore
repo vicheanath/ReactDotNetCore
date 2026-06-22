@@ -1,0 +1,19 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Node / Vite
+node_modules/
+dist/
+samples/ReactDotNetCore.Sample/wwwroot/react-dotnetcore/client/
+
+# Package artifacts
+artifacts/
+*.nupkg
+*.snupkg
+*.tgz
+
+# OS / editor
+.DS_Store
+.vs/

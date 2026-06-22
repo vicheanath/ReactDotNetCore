@@ -1,0 +1,49 @@
+{
+  "name": "@react-dotnetcore/runtime",
+  "version": "0.1.0",
+  "description": "React-as-MVC-view runtime for ReactDotNetCore.AspNetCore: component registry, SSR renderer, client hydration, and a Node SSR sidecar (production + Vite HMR dev).",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "keywords": ["react", "ssr", "aspnetcore", "mvc", "hydration", "vite", "react-dotnetcore"],
+  "repository": { "type": "git", "url": "https://github.com/your-org/react-dotnetcore" },
+  "homepage": "https://github.com/your-org/react-dotnetcore#readme",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./client": { "types": "./dist/client.d.ts", "import": "./dist/client.js" },
+    "./server": { "types": "./dist/server.d.ts", "import": "./dist/server.js" },
+    "./node": { "types": "./dist/node.d.ts", "import": "./dist/node.js" }
+  },
+  "bin": { "react-dotnetcore-ssr": "./dist/bin.js" },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "tsup"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "vite": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "vite": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  },
+  "engines": { "node": ">=18" },
+  "publishConfig": { "access": "public" }
+}

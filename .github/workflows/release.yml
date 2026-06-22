@@ -1,0 +1,32 @@
+name: Release
+
+# Auto-create a GitHub Release (with generated notes) when a vX.Y.Z tag is pushed.
+# Publishing is handled separately by publish.yml, which also triggers on the tag push — they run in
+# parallel. (A release created here uses GITHUB_TOKEN, which by design does NOT trigger publish.yml,
+# so publish.yml must trigger on the tag, not on the release event.)
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write # create the GitHub Release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history so generated notes can diff from the previous tag
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME already exists — skipping."
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              --title "$GITHUB_REF_NAME" \
+              --generate-notes \
+              --verify-tag
+          fi

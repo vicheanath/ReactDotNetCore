@@ -1,7 +1,8 @@
 name: Publish
 
-# Publishes both packages on a GitHub Release (or manual dispatch). Both use Trusted Publishing
-# (OIDC) — no long-lived tokens — with provenance/attestation.
+# Publishes both packages when a vX.Y.Z tag is pushed (or via manual dispatch). Both use Trusted
+# Publishing (OIDC) — no long-lived tokens — with provenance/attestation. release.yml creates the
+# GitHub Release from the same tag push.
 # One-time prerequisites (already done for this repo):
 # - npm: the package exists (bootstrapped once) and a Trusted Publisher is configured on npmjs.com
 #   (org/user `vicheanath`, repo `ReactDotNetCore`, workflow `publish.yml`, environment `production`).
@@ -9,12 +10,33 @@ name: Publish
 #   (secret or variable) to your nuget.org username.
 # NOTE: bump the package version before each release — npm/NuGet reject re-publishing an existing version.
 on:
-  release:
-    types: [published]
+  push:
+    tags: ["v*"]
   workflow_dispatch:
 
 jobs:
+  # Both packages are versioned in lockstep. Fail fast if the pushed tag (vX.Y.Z) doesn't match the
+  # version in the repo, so we never publish a mismatched/duplicate version.
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Versions match the tag
+        run: |
+          if [ "$GITHUB_REF_TYPE" != "tag" ]; then
+            echo "Manual dispatch (not a tag) — publishing the versions in the repo as-is."
+            exit 0
+          fi
+          VERSION="${GITHUB_REF_NAME#v}"
+          NPM=$(node -p "require('./packages/react-dotnetcore-runtime/package.json').version")
+          NUGET=$(grep -oP '(?<=<Version>)[^<]+' Directory.Build.props | head -1)
+          echo "tag=$VERSION  npm=$NPM  nuget=$NUGET"
+          [ "$VERSION" = "$NPM" ] || { echo "::error::npm version $NPM != tag $VERSION"; exit 1; }
+          [ "$VERSION" = "$NUGET" ] || { echo "::error::NuGet version $NUGET != tag $VERSION"; exit 1; }
+          echo "✓ versions match the tag"
+
   npm:
+    needs: verify
     runs-on: ubuntu-latest
     environment: production   # match the environment on the npm Trusted Publisher policy
     permissions:
@@ -36,6 +58,7 @@ jobs:
         run: npm publish -w @react-dotnetcore/runtime --access public --provenance
 
   nuget:
+    needs: verify
     runs-on: ubuntu-latest
     # Must match the Environment configured on the nuget.org trusted publishing policy, so the
     # OIDC token carries the expected `environment` claim. Remove if your policy has no environment.

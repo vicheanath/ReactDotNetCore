@@ -12,6 +12,7 @@
     "build": "npm run build:runtime && npm run build:sample",
     "typecheck": "npm run typecheck -w @react-dotnetcore/runtime",
     "test": "npm run test -w @react-dotnetcore/runtime",
+    "bump": "node scripts/version.mjs",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"

@@ -19,8 +19,10 @@ Make sure the published output includes:
 - `ssr-server.mjs` and the `node_modules` needed by it (at minimum `@react-dotnetcore/runtime`,
   `react`, `react-dom`)
 
-> Tip: run `npm run build` **before** `dotnet publish`, and ensure your `.csproj` doesn't exclude the
-> built `dist/` and `wwwroot/react-dotnetcore/` outputs from publish.
+::: tip
+Run `npm run build` **before** `dotnet publish`, and ensure your `.csproj` doesn't exclude the built
+`dist/` and `wwwroot/react-dotnetcore/` outputs from publish.
+:::
 
 ## Runtime requirements
 

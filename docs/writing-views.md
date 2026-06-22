@@ -63,8 +63,10 @@ public sealed class Orders      : IReactComponent;
 Keep them together in one file (e.g. `ReactComponents.cs`). They carry no logic — they exist so the
 compiler can map `ReactView<Dashboard>()` to the `Dashboard.tsx` component by name.
 
-> Prefer not to maintain markers by hand? Use the string overload `this.ReactView("Dashboard", model)`
-> instead — it skips the marker entirely.
+::: tip
+Prefer not to maintain markers by hand? Use the string overload `this.ReactView("Dashboard", model)`
+instead — it skips the marker entirely.
+:::
 
 ## Model → props
 

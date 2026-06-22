@@ -3,8 +3,9 @@
 This guide sets up ReactDotNetCore in a **new ASP.NET Core MVC app** from scratch. If you already
 have an MVC app, skip step 1 and apply the rest.
 
-> Prefer to learn by reading working code? See the `samples/ReactDotNetCore.Sample` project in the
-> repository — every file referenced below exists there.
+::: tip Learn by reading working code
+The `samples/ReactDotNetCore.Sample` project in the repository contains every file referenced below.
+:::
 
 ## 1. Create the project
 
@@ -98,9 +99,12 @@ export default defineConfig(({ command, isSsrBuild }) => ({
 }
 ```
 
-**`entry-server.tsx`** — SSR entry (exports `render`):
+The three glue files — SSR entry, hydration entry, and the sidecar bootstrap:
 
-```tsx
+::: code-group
+
+```tsx [entry-server.tsx]
+// SSR entry — exports render()
 import { createRegistry } from "@react-dotnetcore/runtime";
 import { createServerRenderer } from "@react-dotnetcore/runtime/server";
 
@@ -108,9 +112,8 @@ const registry = createRegistry(import.meta.glob("./Views/*.tsx", { eager: true 
 export const render = createServerRenderer(registry);
 ```
 
-**`entry-client.tsx`** — hydration entry:
-
-```tsx
+```tsx [entry-client.tsx]
+// Hydration entry
 import { createRegistry } from "@react-dotnetcore/runtime";
 import { mount } from "@react-dotnetcore/runtime/client";
 
@@ -118,12 +121,13 @@ const registry = createRegistry(import.meta.glob("./Views/*.tsx", { eager: true 
 mount(registry);
 ```
 
-**`ssr-server.mjs`** — the sidecar the .NET host launches (logic lives in the runtime):
-
-```js
+```js [ssr-server.mjs]
+// The sidecar the .NET host launches — logic lives in the runtime
 import { startFromEnv } from "@react-dotnetcore/runtime/node";
 startFromEnv().catch((err) => { console.error(err); process.exit(1); });
 ```
+
+:::
 
 ## 4. Wire up ASP.NET Core
 

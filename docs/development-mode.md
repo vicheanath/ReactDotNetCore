@@ -28,10 +28,16 @@ supervises the Vite-backed sidecar for you.
   the React Fast Refresh preamble, `/@vite/client` (HMR socket), and `/entry-client.tsx`.
 - No production manifest or `<link>` is used; Vite injects styles and handles HMR.
 
-```
-Browser ──► ASP.NET app ──/render──► sidecar (Vite ssrLoadModule) ──► fresh SSR HTML
-   │                                     ▲
-   └── loads /@vite/client + entry ──────┘  (modules + HMR straight from Vite)
+```mermaid
+flowchart LR
+    B[Browser]
+    A[ASP.NET app]
+    S[Vite-backed sidecar]
+    B -->|navigate| A
+    A -->|POST /render| S
+    S -->|fresh SSR HTML| A
+    A -->|HTML page| B
+    B -.->|"/@vite/client + entry-client.tsx (modules + HMR)"| S
 ```
 
 ## Avoiding the flash of unstyled content (FOUC)
@@ -48,9 +54,11 @@ builder.Services.AddReactDotNetCore(o =>
 });
 ```
 
-> This removes the unstyled flash. Note that navigating between views is still a normal full-page
-> load (the same as production and Razor) — ReactDotNetCore renders independent server-rendered MVC
-> views, not a single-page app, so there is no client-side router.
+::: info Full-page navigation
+This removes the unstyled flash. Note that navigating between views is still a normal full-page load
+(the same as production and Razor) — ReactDotNetCore renders independent server-rendered MVC views,
+not a single-page app, so there is no client-side router.
+:::
 
 ## Requirements
 

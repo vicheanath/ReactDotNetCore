@@ -2,21 +2,23 @@
 
 ## Request flow
 
-```
-Browser ─GET /Users/Detail/7─► MVC Controller
-                                   │  _userService.GetUser(7)        (your existing code)
-                                   ▼
-                           this.ReactView<UserProfile>(model)
-                                   │  serialize model → camelCase JSON props
-                                   ▼
-                       ReactDotNetCoreRenderer ──HTTP /render──► Node SSR sidecar
-                                   │                               renderToString(<UserProfile …/>)
-                                   ◄──────────── { html } ─────────┘
-                                   │  resolve client assets (Vite manifest, prod)
-                                   ▼
-        HTML page: SSR markup + embedded props + hydration script
-                                   ▼
-                          Browser hydrates with the same component + props
+```mermaid
+sequenceDiagram
+    autonumber
+    participant B as Browser
+    participant C as MVC Controller
+    participant R as ReactDotNetCoreRenderer
+    participant S as Node SSR sidecar
+    B->>C: GET /Users/Detail/7
+    Note over C: _userService.GetUser(7) — your existing code
+    C->>R: ReactView&lt;UserProfile&gt;(model)
+    Note over R: serialize model → camelCase props
+    R->>S: POST /render { component, props }
+    Note over S: renderToString(UserProfile)
+    S-->>R: { html }
+    Note over R: resolve client assets (Vite manifest, prod)
+    R-->>B: HTML — SSR markup + props + hydration script
+    Note over B: hydrate with same component + props
 ```
 
 ## Components

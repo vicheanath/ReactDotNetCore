@@ -41,8 +41,10 @@ export default function Dashboard(props: DashboardProps) {
 }
 ```
 
-> Only files in `Views/` are registered as views. Shared components live elsewhere (e.g.
-> `components/`) and are imported — they are not addressable as views themselves.
+::: info
+Only files in `Views/` are registered as views. Shared components live elsewhere (e.g.
+`components/`) and are imported — they are not addressable as views themselves.
+:::
 
 ## Partial views / shared widgets
 

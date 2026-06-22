@@ -1,8 +1,9 @@
 import { defineConfig } from "vitepress";
+import { withMermaid } from "vitepress-plugin-mermaid";
 
 const repo = "https://github.com/vicheanath/ReactDotNetCore";
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: "ReactDotNetCore",
   description: "Use React components as ASP.NET Core MVC views — SSR + hydration, no API or SPA.",
   lang: "en-US",
@@ -67,4 +68,7 @@ export default defineConfig({
       copyright: `Copyright © ${new Date().getFullYear()} ReactDotNetCore Contributors`,
     },
   },
-});
+
+  // Mermaid theme follows the site's light/dark mode.
+  mermaid: {},
+}));

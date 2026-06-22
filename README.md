@@ -120,8 +120,11 @@ npm pack -w @react-dotnetcore/runtime --pack-destination artifacts  # → .tgz
 ```
 
 CI (`.github/workflows/ci.yml`) builds, typechecks, and packs both on every push/PR.
-Publishing (`.github/workflows/publish.yml`) pushes to npm + NuGet on a GitHub Release
-(needs `NPM_TOKEN` and `NUGET_API_KEY` secrets).
+Publishing (`.github/workflows/publish.yml`) pushes to npm + NuGet on a GitHub Release. **Both use
+Trusted Publishing (OIDC) — no long-lived tokens.** Configure a trusted publisher on npmjs.com and a
+trusted publishing policy on nuget.org (each scoped to this repo + workflow file + the `production`
+environment), and set the `NUGET_USER` secret to your nuget.org username. Note: npm requires the
+package to exist first, so the initial publish must use a token or a local `npm publish`.
 
 ## License
 

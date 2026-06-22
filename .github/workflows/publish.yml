@@ -1,12 +1,13 @@
 name: Publish
 
 # Publishes both packages on a GitHub Release (or manual dispatch). Both use Trusted Publishing
-# (OIDC) — no long-lived tokens.
-# - npm: configure a Trusted Publisher on npmjs.com for this package (repo + workflow file +
-#   environment). NOTE: the package must already exist, so the FIRST publish must be done with a
-#   token or locally (`npm publish`); after that, OIDC works.
-# - NuGet: configure a trusted publishing policy on nuget.org (repo + workflow file + environment),
-#   and set the NUGET_USER secret to your nuget.org username.
+# (OIDC) — no long-lived tokens — with provenance/attestation.
+# One-time prerequisites (already done for this repo):
+# - npm: the package exists (bootstrapped once) and a Trusted Publisher is configured on npmjs.com
+#   (org/user `vicheanath`, repo `ReactDotNetCore`, workflow `publish.yml`, environment `production`).
+# - NuGet: a trusted publishing policy on nuget.org (same repo/workflow/environment); set NUGET_USER
+#   (secret or variable) to your nuget.org username.
+# NOTE: bump the package version before each release — npm/NuGet reject re-publishing an existing version.
 on:
   release:
     types: [published]
@@ -30,8 +31,9 @@ jobs:
       - run: npm ci
       - run: npm run build:runtime
       - name: Publish @react-dotnetcore/runtime (OIDC trusted publishing)
-        run: npm publish -w @react-dotnetcore/runtime --access public
-        # No NODE_AUTH_TOKEN — npm performs the OIDC exchange automatically and adds provenance.
+        # No token — npm performs the OIDC exchange automatically. --provenance attaches a signed
+        # build attestation (needs id-token: write + matching repository.url in package.json).
+        run: npm publish -w @react-dotnetcore/runtime --access public --provenance
 
   nuget:
     runs-on: ubuntu-latest

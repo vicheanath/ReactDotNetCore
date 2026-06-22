@@ -44,7 +44,7 @@ Nothing else changes — same controller, same service, same model.
 | `@foreach (var x in Model.Items) { … }` | `props.items.map((x) => …)` |
 | `@if (Model.IsAdmin) { … }` | `{props.isAdmin && …}` |
 | `<a asp-controller="Users" asp-action="Detail" asp-route-id="7">` | `<a href="/Users/Detail/7">` |
-| `@Html.Raw(...)` | `<div dangerouslySetInnerHTML={{ __html: ... }} />` (sanitize first) |
+| `@Html.Raw(...)` | `<div dangerouslySetInnerHTML={ { __html: ... } } />` (sanitize first) |
 | Shared `_Layout.cshtml` | a `Layout.tsx` component you import — see [Layouts](layouts-and-components.md) |
 | `@section Scripts { … }` | put interactivity in the component; it hydrates automatically |
 
@@ -59,7 +59,7 @@ Nothing else changes — same controller, same service, same model.
 
 Your existing C# view models serialize straight to props (camelCase). You usually don't need to
 change them — just type the matching `props` interface in the `.tsx`. See
-[Writing Views › Model → props](writing-views.md#model--props) for date/collection notes.
+[Writing Views › Model → props](writing-views.md#model-props) for date/collection notes.
 
 ## When to convert vs. keep Razor
 

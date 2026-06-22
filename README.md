@@ -21,6 +21,8 @@ export default function UserProfile(props: UserDto) {
 
 ## Documentation
 
+📖 **Docs site: https://vicheanath.github.io/ReactDotNetCore/**
+
 Full guides live in [`docs/`](docs/README.md):
 
 - [Getting Started](docs/getting-started.md) — set up a new project from scratch

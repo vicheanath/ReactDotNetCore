@@ -8,6 +8,9 @@ node_modules/
 dist/
 samples/ReactDotNetCore.Sample/wwwroot/react-dotnetcore/client/
 
+# VitePress (dist is covered by dist/ above; ignore the build cache)
+docs/.vitepress/cache/
+
 # Package artifacts
 artifacts/
 *.nupkg

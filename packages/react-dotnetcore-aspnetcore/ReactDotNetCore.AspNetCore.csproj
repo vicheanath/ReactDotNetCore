@@ -16,8 +16,8 @@
     <PackageTags>react;ssr;mvc;razor-pages;aspnetcore;vite;hydration;typescript;view-engine</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/your-org/react-dotnetcore</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/your-org/react-dotnetcore</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/vicheanath/ReactDotNetCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vicheanath/ReactDotNetCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>

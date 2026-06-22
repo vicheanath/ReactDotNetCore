@@ -6,8 +6,8 @@
   "type": "module",
   "sideEffects": false,
   "keywords": ["react", "ssr", "aspnetcore", "mvc", "hydration", "vite", "react-dotnetcore"],
-  "repository": { "type": "git", "url": "https://github.com/your-org/react-dotnetcore" },
-  "homepage": "https://github.com/your-org/react-dotnetcore#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/vicheanath/ReactDotNetCore.git" },
+  "homepage": "https://github.com/vicheanath/ReactDotNetCore#readme",
   "files": ["dist", "README.md"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
